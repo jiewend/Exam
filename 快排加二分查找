@@ -1,0 +1,75 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+enum Order{
+  Pos,
+  Rev
+};
+
+void swap(vector<int>& numvec, size_t i, size_t j) {
+  int temp = numvec.at(i);
+  numvec.at(i) = numvec.at(j);
+  numvec.at(j) = temp;
+}
+
+void mysort(vector<int>& numvec, Order orde) {
+  size_t len(numvec.size());
+  if (len < 2) {
+    return ;
+  }
+
+  bool flag(false);
+  for(int i = 0; i < len-1; ++i)
+  {
+    flag = false;  //用于快速判断是否已经排序
+    for(int j = 0; j < (len - i - 1); ++j)
+    {
+      if ( (orde == Pos && numvec.at(j) > numvec.at(j + 1)) ||
+           (orde == Rev && numvec.at(j) < numvec.at(j + 1))
+           ) {
+        swap(numvec, j, j + 1);
+        flag = true;
+      }
+    }
+    //假如一次都没有调换，证明已经排好序了
+    if(!flag)
+    return;
+  }
+}
+
+int mysearch(vector<int> numvec, int target) {
+  size_t len(numvec.size());
+  if (len == 0) {
+    return -1;
+  }
+  int left(0), right(len-1);
+  while (left >= right) {
+    int mid = left + ((right - left) >> 1);
+    if (numvec.at(mid) == target) {
+      return mid;
+    }else if(numvec.at(mid) > target) {
+      right = mid - 1;
+    }else {
+      left = mid + 1;
+    }
+  }
+  return -1;
+}
+
+
+int main(int argc, char *argv[])
+{
+
+  int nums[] = {1, 3, 4, 2, 6, 3, 9};
+  vector<int> numvec(nums, nums + sizeof(nums) / sizeof(nums[0]));
+  mysort(numvec, Pos);
+  for(auto& item : numvec) {
+    cout << item  << " ";
+  }
+  mysearch(numvec, 4);
+
+  return 0;
+}

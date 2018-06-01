@@ -17,10 +17,13 @@ void quickSort(int *arr,int l,int r)
 				i++;
 			while(j>=l&&arr[j]>x)
 				j--;
-			if(i>=j) //相遇则跳出 
+			if(i>=j){ //相遇则跳出 
+				cout<<"i : "<<i<<" j : "<<j<<endl;
 				break;
+			}
 			else
 			{
+				cout<<"["<<i<<"]"<<arr[i]<<"< "<<x<<" >"<<arr[j]<<"["<<j<<"]"<<endl;
 				temp=arr[i];
 				arr[i]=arr[j];
 				arr[j]=temp; 
@@ -41,9 +44,6 @@ int main(){
 	for (unsigned i = 0; i < len; i++)  
 	    cin>>arr[i];
 	
-	for (unsigned i = 0; i < len; i++)  
-		cout<<arr[i]<<" ";
-	cout<<endl;
 	
 	quickSort(arr, 0, len);
 
