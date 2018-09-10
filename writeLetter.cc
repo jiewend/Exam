@@ -6,13 +6,28 @@
 #include <sstream> 
 
 using namespace std;
+template <typename T>
+vector<T> splitSpaceT(std::string stri, T outType){
+	string temp;
+	vector<T>res;
+	istringstream stream(stri);
+	while (stream >> temp)
+	{
+		stringstream iss;
+		iss << temp;
+		T f;
+		iss >> f;
+		res.push_back(f);
+	}
+	return res;
+}
 
 vector<int> splitSpace(std::string stri){
 
 	string temp;
 	vector<int>res;
-	istringstream stream(stri);  //将str传到流stream里面
-	while (stream >> temp)	//将stream流里面的值传到temp，遇到空格插分
+	istringstream stream(stri);
+	while (stream >> temp)
 	{
 		stringstream iss;
 		iss << temp;

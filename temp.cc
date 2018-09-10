@@ -1,5 +1,11 @@
 #include <iostream> 
 #include <stdio.h>
+#include <string.h> 
+#include <iostream> 
+#include <fstream> 
+#include <string> 
+#include <vector> 
+
 using namespace std;
 
 
@@ -25,26 +31,44 @@ void quickSort(int *arr, int l, int r){
 	   quickSort(arr, j + 1, r);
 	} 
 }
-
-class A{
+class shape{
 	public:
-		A(){}
-		~A(){}
-};
+		virtual int area()=0;
 
-class B{
-	B(){}
-	virtual ~B(){}
 };
-
-class C:public A, public B{
+class retangle:public shape{
 	public:
-		C(){}
-		~C(){}
+		int a, b;
+		void setLength(int x, int y){a=x;b=y;};
+		int area(){return a*b;};
 };
+
+template <class T>
+
+void S(T &x, T &y){
+	T temp;
+	temp = x;
+	x = y;
+	y = temp;
+}
+
+template <class T>
+void SS(T A[], int n){
+	int i, j;
+	int min;
+	for (unsigned i = 0; i < n-1; i++) { 
+		min = i;
+		for (unsigned j = i+1;   j< n; j++) { 
+			if(A[j] < A[min]) min=j;
+			S(A[i], A[min]);
+		} 
+
+	} 
+}
 int main(){
-	char temp[6] = {'a', 'b', 'c', '\0', 'd', '\0'};
-	char *p = temp;
-	cout<<sizeof(A)<<"  "<<sizeof(B)<<"  "<<sizeof(C)<<endl;
+	vector<int> vint(1);
+	cout<<vint[1]<<endl;;
+	cout<<vint.at(1);
+
 
 }
