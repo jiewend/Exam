@@ -5,32 +5,11 @@
 #include <fstream> 
 #include <string> 
 #include <vector> 
+#include <math.h> 
+#include <cstring> 
 
 using namespace std;
 
-
-void quickSort(int *arr, int l, int r){
-	int i, j, x, temp;
-	if (l < r) { 
-		i = l;j = r;x = arr[(r + l) / 2];
-		while (1) { 
-			while(i <= r && arr[i] < x)
-				i++;
-			while(j >= l && arr[j] > x)
-				j--;
-			if(i >= j)
-				break;
-			else{
-				temp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = temp;
-			}
-
-		}
-	   quickSort(arr, l, i-1);	
-	   quickSort(arr, j + 1, r);
-	} 
-}
 class shape{
 	public:
 		virtual int area()=0;
@@ -65,10 +44,77 @@ void SS(T A[], int n){
 
 	} 
 }
-int main(){
-	vector<int> vint(1);
-	cout<<vint[1]<<endl;;
-	cout<<vint.at(1);
+class Base{
+	public:
+		int Bar(char x){
+			return (int)(x);
+		}
+		virtual int Bar(int x){
+			return (2 * x);
+		}
+};
+class Derived:public Base{
+	public:
+		int Bar(char x){
+			return (int)(-x);
+		}
+		int Bar(int x){
+			return (x/2);
+		}
+};
 
+class M {
+	public:
+		char * str;
+		M(const char*s){
+			str = new char[10];
+			strcpy(str, s);
+		}
+		M &operator += (M a){
+
+			// strcpy(str, a.str);
+			// str = str + a.str;
+			// strcmp(str, a.str);
+			strcat(str, a.str);
+			return *this;
+		}
+		void show(){
+			cout<<str;
+		}
+};
+
+
+struct A{
+	void foo(){
+		printf("foo");
+	}
+	virtual void bar(){
+		printf("bar");
+	}
+	A(){
+		bar();
+	}
+};
+struct B:A{
+	void foo(){
+		printf("b_foo");
+		}
+	void bar(){
+		printf("b_bar");
+	}
+};
+typedef int (*pFun)(int, int);
+
+float aa(int x){
+    float res;
+    if(x == 1)
+        res = 1.0;
+    else
+        res = (1000000 - aa(x - 1)) / (1000000.0) + aa(x -  1);
+    return res;
+}
+
+int main(){
+    cout<<aa(1000000)<<endl;
 
 }
